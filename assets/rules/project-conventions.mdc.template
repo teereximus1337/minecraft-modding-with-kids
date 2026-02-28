@@ -1,0 +1,22 @@
+---
+description: Global project conventions for the {{MOD_ID}} Minecraft modding project
+alwaysApply: true
+---
+
+# {{MOD_ID}} Project Conventions
+
+## When Generating Code
+- MANDATORY: consult class-mappings-1.21.11.md BEFORE writing any Java code
+- MANDATORY: if {{CHILD_NAME}} is present, generate audio explanation BEFORE writing code
+- Generate ALL required files for new items/blocks (Java, registration, model, client item, lang, texture)
+- Never generate partial implementations
+- Always include full file paths
+
+## Content Policy
+- Fantasy/sci-fi items encouraged. No realistic firearms.
+- Keep names fun and silly. This is {{CHILD_NAME}}'s world.
+- Celebrate wins. Frame bugs as puzzles.
+
+## Git
+- Fun, descriptive commit messages
+- Commit after every working milestone

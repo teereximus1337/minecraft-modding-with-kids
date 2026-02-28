@@ -1,0 +1,27 @@
+---
+description: Java conventions for Minecraft Fabric mod development
+globs: **/*.java
+alwaysApply: false
+---
+
+# Java / Minecraft Fabric Conventions
+
+## Fabric Patterns (1.21.11 Mojang Mappings)
+- ALWAYS check class-mappings-1.21.11.md before writing imports
+- Register using `Registry.register(BuiltInRegistries.ITEM, key, item)`
+- Use `Identifier.fromNamespaceAndPath("{{MOD_ID}}", "item_name")`
+- Swords/tools: use `Item` with `.sword()` / `.pickaxe()` on Properties
+- `hurtEnemy()` returns `void`, not `boolean`
+- `inventoryTick` takes `(ItemStack, ServerLevel, Entity, @Nullable EquipmentSlot)`
+- Use `player.getMainHandItem() == stack` instead of checking slot parameter
+- Block interactions: override BOTH `useWithoutItem` AND `useItemOn`
+
+## Style
+- One public class per file
+- Use descriptive, fun class names {{CHILD_NAME}} would recognize
+- Package structure: `{{MOD_ID}}.<category>` (item, block, entity)
+
+## Naming
+- Item IDs: lowercase_snake_case
+- Class names: PascalCase
+- Translation keys: `item.{{MOD_ID}}.item_name`

@@ -1,0 +1,27 @@
+---
+description: JSON conventions for Minecraft mod resource files
+globs: **/*.json
+alwaysApply: false
+---
+
+# Minecraft JSON Resource Conventions
+
+## File Locations
+- Item models: `src/main/resources/assets/{{MOD_ID}}/models/item/`
+- Block models: `src/main/resources/assets/{{MOD_ID}}/models/block/`
+- Block states: `src/main/resources/assets/{{MOD_ID}}/blockstates/`
+- Textures: `src/main/resources/assets/{{MOD_ID}}/textures/item/` and `.../block/`
+- Lang: `src/main/resources/assets/{{MOD_ID}}/lang/en_us.json`
+- Client items: `src/main/resources/assets/{{MOD_ID}}/items/`
+- Sounds: `src/main/resources/assets/{{MOD_ID}}/sounds/` + `sounds.json`
+
+## Models
+- Items: inherit `minecraft:item/handheld` (tools) or `minecraft:item/generated` (flat)
+- Blocks: inherit `minecraft:block/cube_all` for simple cubes
+- Reference textures with namespace: `{{MOD_ID}}:item/my_item`
+
+## Client Item Definitions (required in 1.21.11)
+Every item needs `assets/{{MOD_ID}}/items/<item_id>.json`:
+```json
+{"model": {"type": "minecraft:model", "model": "{{MOD_ID}}:item/<item_id>"}}
+```

@@ -88,18 +88,28 @@ Build these concepts over multiple sessions:
 - Frame bugs as puzzles, not failures
 - End with a teaser or call to action
 
-## ElevenLabs Settings
+## Voice Generation via Zapier MCP
+
+Call the Zapier MCP to generate speech:
 
 ```
-tool: text_to_speech
-voice_id: {{ELEVENLABS_VOICE_ID}}
-model_id: eleven_flash_v2_5
-output_format: mp3_44100_128
-output_directory: {{WORKSPACE}}/audio
-speed: 1.0
-stability: 0.45
-similarity_boost: 0.75
+tool: execute_write_action (on the Zapier MCP server)
+app: elevenlabs
+action: text_to_speech
+params:
+  text: <the explanation text>
+  voice_id: {{ELEVENLABS_VOICE_ID}}
+  model_id: eleven_flash_v2_5
+  output_format: mp3_44100_128
+output: "The URL of the generated audio file"
 ```
 
-Play with `open` (macOS) or `xdg-open` (Linux). Never use `afplay` (format issues).
-Call `open` exactly ONCE per explanation.
+The result is an S3 URL. Download and play:
+
+```bash
+curl -sL "<URL>" -o {{WORKSPACE}}/audio/explanation.mp3
+open {{WORKSPACE}}/audio/explanation.mp3   # macOS
+# xdg-open on Linux
+```
+
+Never use `afplay` (format issues). Call `open` exactly ONCE per explanation.

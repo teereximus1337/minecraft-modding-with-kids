@@ -26,6 +26,7 @@ npx skills add https://github.com/teereximus1337/minecraft-modding-with-kids -y
 - **macOS or Linux** (Apple Silicon or Intel)
 - **Minecraft Java Edition** (~$30 from [minecraft.net](https://minecraft.net))
 - **ElevenLabs account** (for voice explanations -- [elevenlabs.io](https://elevenlabs.io), free tier available)
+- **Zapier MCP** (connects ElevenLabs to your agent -- [mcp.zapier.com](https://mcp.zapier.com), free tier available)
 - **An AI coding agent** (Cursor, Claude Code, etc.)
 
 ## How It Works

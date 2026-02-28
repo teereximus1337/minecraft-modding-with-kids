@@ -76,21 +76,23 @@ Run `scripts/generate-workspace.sh` with a JSON config of all interview answers.
 - An `audio/` directory for voice output
 - A `.gitignore` covering build artifacts, audio output, and secrets
 
-### Step 6: Configure ElevenLabs MCP
+### Step 6: Configure ElevenLabs via Zapier MCP
 
-Detect the agent type and add the ElevenLabs MCP server config:
+The recommended approach is to add ElevenLabs as an action inside a Zapier MCP server. This avoids installing a separate MCP server and works across all agents.
+
+1. Go to [mcp.zapier.com](https://mcp.zapier.com) and create/sign in to an account
+2. Enable the **ElevenLabs** app and the **Convert Text to Speech** action
+3. Connect the parent's ElevenLabs account when prompted
+4. Copy the Zapier MCP server URL
+
+Then add the Zapier MCP to the agent config:
 
 **Cursor** (`.cursor/mcp.json`):
 ```json
 {
-  "elevenlabs": {
-    "command": "uvx",
-    "args": ["elevenlabs-mcp"],
-    "env": {
-      "ELEVENLABS_API_KEY": "{{KEY}}",
-      "ELEVENLABS_MCP_BASE_PATH": "{{WORKSPACE}}/audio",
-      "ELEVENLABS_MCP_OUTPUT_MODE": "files"
-    }
+  "zapier": {
+    "url": "{{ZAPIER_MCP_URL}}",
+    "headers": {}
   }
 }
 ```
@@ -99,16 +101,22 @@ Detect the agent type and add the ElevenLabs MCP server config:
 ```json
 {
   "mcpServers": {
-    "ElevenLabs": {
-      "command": "uvx",
-      "args": ["elevenlabs-mcp"],
-      "env": { "ELEVENLABS_API_KEY": "{{KEY}}" }
+    "zapier": {
+      "url": "{{ZAPIER_MCP_URL}}",
+      "headers": {}
     }
   }
 }
 ```
 
-For other agents, print the config and ask the parent to paste it into the appropriate file.
+For other agents, provide the URL and ask the parent to add it to their MCP config.
+
+To generate voice, call the Zapier MCP:
+- tool: `execute_write_action`
+- app: `elevenlabs`
+- action: `text_to_speech`
+- params: `text`, `voice_id`, `model_id` (`eleven_flash_v2_5`), `output_format` (`mp3_44100_128`)
+- The result is an S3 URL. Download with `curl -sL <URL> -o audio/explanation.mp3`, then play with `open` (macOS) or `xdg-open` (Linux).
 
 ### Step 7: Create Starter Mod
 
